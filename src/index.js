@@ -49,7 +49,21 @@ const pizzaData = [
 function App() {
   return (
     <>
-      <h1>Hello React!</h1>
+      <Header />
+      <Menu />
+      <Footer />
+    </>
+  );
+}
+
+function Header() {
+  return <h1>Sam's Pizza Co.</h1>;
+}
+
+function Menu() {
+  return (
+    <>
+      <h2>Our Menu</h2>
       <Pizza />
       <Pizza />
       <Pizza />
@@ -57,10 +71,24 @@ function App() {
   );
 }
 
+function Footer() {
+  // return React.createElement('footer', null, 'Hours: Mon-Sun 11am - 10pm')
+
+  return (
+    <footer>
+      {new Date().toLocaleTimeString()}
+      <br></br>
+      Daily Hours: 11am - 10pm
+      <br></br>
+      Come see us!
+    </footer>
+  );
+}
+
 function Pizza() {
   return (
     <>
-    <img src='pizzas/margherita.jpg' alt='margherita pizza'></img>
+      <img src='pizzas/margherita.jpg' alt='margherita pizza'></img>
       <h2>Pizza Margherita</h2>
       <p>Tomato and mozarella</p>
     </>
