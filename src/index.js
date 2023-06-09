@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './index.css';
 
 const pizzaData = [
   {
@@ -48,50 +49,82 @@ const pizzaData = [
 
 function App() {
   return (
-    <>
+    <div className='container'>
       <Header />
       <Menu />
       <Footer />
-    </>
+    </div>
   );
 }
 
 function Header() {
-  return <h1>Sam's Pizza Co.</h1>;
+  //   const style = {
+  //     color: 'red',
+  //     fontSize: '64px',
+  //     textTransform: 'uppercase',
+  //   };
+  return (
+    <header className='header'>
+      <h1>Sam's Pizza Co.</h1>;
+    </header>
+  );
 }
 
 function Menu() {
   return (
-    <>
+    <div className='menu'>
       <h2>Our Menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-    </>
+      <Pizza
+        name='Pizza Margherita'
+        ingredients='Tomato and mozzarella'
+        photoName='pizzas/margherita.jpg'
+        alt='margherita pizza'
+        price={10}
+      />
+
+      <Pizza
+        name='Pizza Funghi'
+        ingredients='Tomato and mushrooms'
+        price={12}
+        photoName='pizzas/funghi.jpg'
+        alt='funghi pizza'
+      />
+    </div>
+  );
+}
+
+function Pizza(props) {
+  console.log(props);
+  return (
+    <div className='pizza'>
+      <img src={props.photoName} alt={props.alt}></img>
+      <div>
+        <h3>{props.name}</h3>
+        <p>{props.ingredients}</p>
+        <p>{props.price}</p>
+      </div>
+    </div>
   );
 }
 
 function Footer() {
+  const hour = new Date().getHours();
+  const openHour = 12;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
+
+  // if (hour >= openHour && hour <= closeHour) alert(`We're currently open!`); else alert(`Sorry, we are currently closed`);
   // return React.createElement('footer', null, 'Hours: Mon-Sun 11am - 10pm')
 
   return (
-    <footer>
+    <footer className='footer'>
       {new Date().toLocaleTimeString()}
       <br></br>
-      Daily Hours: 11am - 10pm
+      Daily Hours: 12pm - 10pm
       <br></br>
       Come see us!
     </footer>
-  );
-}
-
-function Pizza() {
-  return (
-    <>
-      <img src='pizzas/margherita.jpg' alt='margherita pizza'></img>
-      <h2>Pizza Margherita</h2>
-      <p>Tomato and mozarella</p>
-    </>
   );
 }
 
