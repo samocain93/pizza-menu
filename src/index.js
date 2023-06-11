@@ -79,12 +79,19 @@ function Menu() {
     <div className='menu'>
       <h2>Our Menu</h2>
 
-      {numPizzas ? (
-        <ul className='pizzas'>
-          {pizzas.map((pizza) => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
-          ))}
-        </ul>
+      {numPizzas > 0 ? (
+        <>
+          <p>
+            Serving up the best, New York style pizza in Austin, Texas.
+            Hand-tossed every day and made fresh, just for YOU with ingredients
+            carefully sourced and crafted with love
+          </p>
+          <ul className='pizzas'>
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
       ) : (
         <p>We're still working on our menu. Please come back later :)</p>
       )}
@@ -108,15 +115,18 @@ function Menu() {
   );
 }
 
-function Pizza(props) {
-  console.log(props);
+function Pizza({ pizzaObj }) {
+  console.log(pizzaObj);
+
+  if (pizzaObj.soldOut) return null;
+
   return (
     <li className='pizza'>
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.alt}></img>
+      <img src={pizzaObj.photoName} alt={pizzaObj.alt}></img>
       <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <p>{props.pizzaObj.price}</p>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <p>{pizzaObj.price}</p>
       </div>
     </li>
   );
@@ -135,17 +145,23 @@ function Footer() {
   return (
     <footer className='footer'>
       {isOpen ? (
-        <div className='order'>
-          <p>
-            We're open from 11am - 10pm every day. Come by and see us or place
-            an order online!
-          </p>
-          <button className='btn'>Order Online</button>
-        </div>
+        <Order openHours={openHour} closeHour={closeHour} />
       ) : (
         <p>Oops! Looks like we're closed. Come back and see us tomorrow!</p>
       )}
     </footer>
+  );
+}
+
+function Order({ openHour, closeHour }) {
+  return (
+    <div className='order'>
+      <p>
+        We're open from 11am - 10pm every day. Come by and see us or place an
+        order online!
+      </p>
+      <button className='btn'>Order Online</button>
+    </div>
   );
 }
 
